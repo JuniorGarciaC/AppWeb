@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foro de Programación</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="foro.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1>Foro de Programación</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Foros</a></li>
+                <li><a href="#">Perfil</a></li>
+                <li><a href="#">Cerrar Sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="publicaciones">
+            <!-- Aquí se mostrarán las publicaciones -->
+            <h1>PUBLICACIONES</h1>
+        </section>
+
+    </main>
+    <!-- Publicación con caja de comentarios -->
+    <div class="contenedor">
+        <!-- Contenido de la publicación -->
+        <img src="xc.jpeg" alt="Mi imagen">
+        <div class="texto">
+            <h2>Mi primer aporte</h2>
+            <hr class="linea">
+            <p>Hola que tal buenas tardes.<BR>Me llamo Jesus y quiero el dia de hoy
+                proporcionarles un codigo el cual vendria ser el codigo de mi <br>
+                pagina web para asi ustedes puedan decirme en que falle o en que pueda mejorar,
+                todos estan <br> invitados a opinar, tanto juniors como seniors.
+            </p>
+            <hr class="linea">
+            <pre class="codigo">
+                <code>
+                    xtends Area2D
+
+                    export var gravity = 750
+                    export var jump = -200
+                    export var speed = 150
+                    
+                    var velocity = Vector2.ZERO
+                    
+                    
+                    
+                    signal picked
+                    
+                    func _physics_process(delta):
+                        velocity.y += gravity * delta
+                        
+                        #movimiento del personaje
+                        
+                    
+                    func _ready():
+                        OS.center_window()
+                        $AnimatedSprite.play("idle")
+                    
+                    func _process(delta):
+                        if Input.is_action_pressed("ui_left"):
+                            position.x += -300 * delta
+                            $AnimatedSprite.flip_h = true
+                            
+                        if Input.is_action_pressed("ui_right"):
+                            position.x += 300 * delta
+                            $AnimatedSprite.flip_h = false
+                            
+                            
+                        if Input.is_action_pressed("ui_up"):
+                            position.y += -300 * delta
+                    
+                            
+                            
+                        if Input.is_action_pressed("ui_down"):
+                            position.y += 300 * delta
+                            
+                        process_animation()	
+                    
+                    position.x =clamp(position.x, 0, 480)
+                        position.y = clamp(position.y, 0, 680)
+                    
+                    
+                    
+                    func process_animation():
+                        if Input.is_action_pressed("ui_left") == true:
+                            $AnimatedSprite.play("run")
+                        elif Input.is_action_pressed("ui_right") == true:
+                            $AnimatedSprite.play("run")
+                        elif Input.is_action_pressed("ui_up") == true:
+                            $AnimatedSprite.play("run")
+                        elif Input.is_action_pressed("ui_down") == true:
+                            $AnimatedSprite.play("run")
+                        elif Input.is_action_pressed("ui_page_up") == true:
+                            $AnimatedSprite.play("attack")
+                        else:
+                            $AnimatedSprite.play("idle")
+                        
+                    func _on_Jugador_area_entered(area):
+                        if area.is_in_group("Enemy"):
+                            print("Enemigo muerto")
+                            area.pickup()
+                            emit_signal("picked")
+                            
+                    func game_over():
+                        set_process(false)
+                        $AnimatedSprite.play("hurt")
+            </pre>
+            <hr class="linea">
+        </div>
+    </div>
+    <div class="publicacion">
+        <!-- Contenido de la publicación -->
+        <!-- Contenedor para la foto de perfil y comentarios -->
+
+        <div class="profileAndComments">
+            <!-- Foto de perfil del usuario -->
+            <div class="userProfile">
+                <img id="fotoPerfil" src=" xd.jpeg" alt="perfil de usuario">
+                <!-- Enlaces a redes sociales -->
+                <div class="socialLinks">
+                    <a href="https://www.facebook.com/tu_usuario" target="_blank"><img src="descarga.png"
+                            alt="Facebook"></a>
+                    <a href="https://twitter.com/tu_usuario" target="_blank"><img src="qw.jpeg" alt="Twitter"></a>
+                    <!-- Agrega más enlaces a otras redes sociales según sea necesario -->
+                </div>
+            </div>
+
+            <!-- Caja de comentarios -->
+            <div id="cajaComentarios" class="comentarios">
+                <h2>Comentarios</h2>
+                <form id="formularioComentario" class="commentForm">
+                    <textarea id="contenidoComentario" class="commentContent"
+                        placeholder="Escribe tu comentario"></textarea>
+                    <button type="submit">Comentar</button>
+                </form>
+                <!-- Aquí se mostrarán los comentarios -->
+                <div id="listaComentarios" class="commentList">
+                    <!-- Los comentarios se añadirán dinámicamente aquí -->
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <footer>
+        <p>&copy; 2024 Foro de Programación</p>
+    </footer>
+</body>
+
+</html>
